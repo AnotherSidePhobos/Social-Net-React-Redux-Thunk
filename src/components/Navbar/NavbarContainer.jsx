@@ -3,22 +3,14 @@ import { connect } from 'react-redux';
 import { Navbar } from './Navbar';
 import { authMe } from './../../API/api';
 import {setAuthUserData} from './../../redux/authReducer';
+import {getAuthMe} from './../../redux/authReducer';
 import axios from 'axios';
 
 class NavbarContainer extends Component {
     componentDidMount(){
-        this.getAuth();
+        this.props.getAuthMe()
     }
-    getAuth = () =>{
-        authMe()
-            .then(response => {
-                console.log(response.data);
-                if (response.data.resultCode === 0) {
-                    let {email, id, login} = response.data.data;
-                    this.props.setAuthUserData(id, email, login)
-                }
-                });
-    }
+
     render() {
         return (
             <Navbar {...this.props}/>
@@ -34,4 +26,4 @@ const mapStateToProps = (state) =>{
 }
 
 
-export default connect(mapStateToProps, {setAuthUserData})(NavbarContainer);
+export default connect(mapStateToProps, {getAuthMe})(NavbarContainer);

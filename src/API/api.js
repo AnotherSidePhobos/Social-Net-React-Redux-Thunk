@@ -22,18 +22,22 @@
       );
   }
 
-  export const authMe = () =>{
-      return axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+  export const authMeAPI = () =>{
+      
+      return axios.get(baseUrl + `/auth/me`, {
           withCredentials: true,
           headers:{
             "API-KEY": "e22c8b18-65be-4675-9893-02c6ab83692c" 
           },
       })
   }
+  export const getOneUserAPI = (userId) =>{
+      return axios.get(baseUrl + `profile/${userId}`)
+  }
  
   export const unFollowAPI = (userId) =>{
     debugger
-      return( axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+      return( axios.delete(baseUrl + `1.0/follow/${userId}`, {
         withCredentials: true,
         headers:{
             "API-KEY": "e22c8b18-65be-4675-9893-02c6ab83692c"
@@ -44,7 +48,7 @@
 
   export const followAPI = (userId) =>{
     debugger
-      return (axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
+      return (axios.post(baseUrl + `1.0/follow/${userId}`, {}, {
         withCredentials: true,
         headers:{
             "API-KEY": "e22c8b18-65be-4675-9893-02c6ab83692c" 

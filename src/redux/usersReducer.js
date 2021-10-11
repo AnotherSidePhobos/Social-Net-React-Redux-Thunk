@@ -127,7 +127,7 @@ export const getUsers = (currentPage, pageSize) =>{
     }
 }
 
-//thunk follow
+//thunk creator follow
 export const follow = (userId) =>{
     
     return (dispatch) => {
@@ -139,7 +139,7 @@ export const follow = (userId) =>{
         });
     } 
 }
-//thunk unfollow
+//thunk creator unfollow
 export const unFollow = (userId) =>{
     
     return (dispatch) => {
