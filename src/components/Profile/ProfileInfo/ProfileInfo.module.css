@@ -1,0 +1,11 @@
+.pic{
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 100%;
+}
+.profileInfo{
+    float: left;
+    padding-right: 50px;
+    border-right: 2px solid lightgray;
+    min-width: 400px;
+}

@@ -1,0 +1,37 @@
+.user{
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid lightgray;
+    display: flex;
+    justify-content: space-between;
+}
+.picAndBtn{
+    padding-left: 100px;
+    margin-left: 50px;
+    margin-right: 100px;
+}
+.pic img{
+    max-width: 150px;
+    max-height: 150px;
+    cursor: pointer;
+}
+.userInfo{
+    margin: 5px;
+    padding: 40px;
+    align-items: center;
+    min-width: 700px;
+    margin-right: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+.country,
+.name{
+    margin-bottom: 50px;
+}
+.selected_page{
+    font-weight: 900;
+}
+.pagination span{
+    cursor: pointer;
+    padding: 0 10px;
+}
