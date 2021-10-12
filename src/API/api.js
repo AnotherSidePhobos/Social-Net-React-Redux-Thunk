@@ -37,7 +37,7 @@
  
   export const unFollowAPI = (userId) =>{
     debugger
-      return( axios.delete(baseUrl + `1.0/follow/${userId}`, {
+      return( axios.delete(baseUrl + `follow/${userId}`, {
         withCredentials: true,
         headers:{
             "API-KEY": "e22c8b18-65be-4675-9893-02c6ab83692c"
@@ -48,7 +48,25 @@
 
   export const followAPI = (userId) =>{
     debugger
-      return (axios.post(baseUrl + `1.0/follow/${userId}`, {}, {
+      return (axios.post(baseUrl + `follow/${userId}`, {}, {
+        withCredentials: true,
+        headers:{
+            "API-KEY": "e22c8b18-65be-4675-9893-02c6ab83692c" 
+          }
+        })
+      )
+  }
+  export const getStatusAPI = (userId) =>{
+      return (axios.get(baseUrl + `profile/status/${userId}`,{
+        withCredentials: true,
+        headers:{
+            "API-KEY": "e22c8b18-65be-4675-9893-02c6ab83692c" 
+          }
+        })
+      )
+  }
+  export const updateStatusAPI = (status) =>{
+      return (axios.put(baseUrl + `profile/status`, {status},{
         withCredentials: true,
         headers:{
             "API-KEY": "e22c8b18-65be-4675-9893-02c6ab83692c" 

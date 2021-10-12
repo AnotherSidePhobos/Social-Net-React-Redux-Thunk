@@ -1,8 +1,10 @@
 import React from 'react';
 import Loading from '../../Loading/Loading';
 import s from './ProfileInfo.module.css';
+import Status from './../../Status/Status';
 
-export const ProfileInfo = ({profileInfo}) => {
+
+export const ProfileInfo = ({profileInfo, status, updateStatus}) => {
     if (!profileInfo) {
         return(
             <Loading/>
@@ -26,6 +28,7 @@ export const ProfileInfo = ({profileInfo}) => {
                 <div>
                     contacts: {profileInfo.contacts.vk}
                 </div>
+                <Status status={status} updateStatus={updateStatus}/>
             </div>
         )
     }

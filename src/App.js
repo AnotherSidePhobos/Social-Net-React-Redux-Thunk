@@ -6,6 +6,8 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login/Login';
 import NavbarContainer from './components/Navbar/NavbarContainer';
+import PageNotFound from './components/PageNotFound/PageNotFound';
+
 
 function App(props) {
   debugger
@@ -21,9 +23,9 @@ function App(props) {
               <Route path="/music" component={Music} />
               <Route path="/profile/:userId?" component={ProfileContainer} />
               <Route path='/' exact component={ProfileContainer}/>
-
-
               <Route path="/login" component={Login} />
+              <Route component={PageNotFound}/>
+
               </Switch>
           </div>
 

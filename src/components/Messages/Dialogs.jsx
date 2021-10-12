@@ -28,11 +28,6 @@ const Dialogs = (props) => {
   let messagesElements = mesData
       .map(m => <MessageItem key={m.id} message={m.message} />)
 
-
-    if (!props.isAuth) {
-        return <Redirect to={"/login"}/>
-    }
-
   return (
       <div className={s.dialogs}>
           <div className={s.dialog_items}>
