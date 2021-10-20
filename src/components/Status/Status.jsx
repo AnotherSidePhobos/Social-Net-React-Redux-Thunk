@@ -22,6 +22,13 @@ class Status extends Component {
             status: e.currentTarget.value
         })
     }
+    componentDidUpdate(prevProps, prevState){ // не срабатывает при первой прорисовке или последующих прорисовках, срабатывает только если изменился компонент, а точнее его state
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
     render() {
         return (
             <>

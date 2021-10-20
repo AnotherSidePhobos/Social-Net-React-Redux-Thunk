@@ -1,10 +1,11 @@
 import React from 'react'
 
-const MessagesItem = ({text}) => {
+const MessagesItem = (props) => {
     debugger
+
     return (
         <div>
-            {text}
+            {props.message}
         </div>
     )
 }
