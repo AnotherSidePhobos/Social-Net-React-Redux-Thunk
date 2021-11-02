@@ -1,4 +1,5 @@
-import {authMeAPI} from './../API/api';
+import { stopSubmit } from 'redux-form';
+import {authMeAPI, loginAPI, logoutAPI} from './../API/api';
 
 
 
@@ -17,21 +18,21 @@ const authReducer = (state = initialState, action) =>{
             debugger
             return{
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload
             }
     
         default: return state
     }
 }
 
-export const setAuthUserData = (id, email, login) =>{
+export const setAuthUserData = (id, email, login, isAuth) =>{
     return{
         type: SET_USER_DATA,
-        data: {
+        payload: {
             id,
             email, 
-            login
+            login,
+            isAuth
         }
     }
 }
@@ -39,15 +40,38 @@ export const setAuthUserData = (id, email, login) =>{
 // this is a thunk creator!
 export const getAuthMe = () =>{
     return (dispatch) => {
-        authMeAPI()
+       return authMeAPI()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {email, id, login} = response.data.data;
-                dispatch(setAuthUserData(id, email, login))
+                dispatch(setAuthUserData(id, email, login, true))
             }
             });
     }
 
+}
+export const login = (email, password, rememberMe) => (dispatch) => {
+  
+    loginAPI(email, password, rememberMe)
+    .then((response) => {
+        if (response.data.resultCode === 0) {
+            dispatch(getAuthMe())
+        }else{
+        let message = response.data.messages.length > 0 ?
+        response.data.messages[0] :
+        "Some Error"
+        debugger
+        dispatch(stopSubmit(login, {_error: message}))
+        }
+    })
+}
+export const logout = () => (dispatch) => {
+    logoutAPI()
+    .then((response) => {
+        if (response.data.resultCode === 0) {
+            dispatch(setAuthUserData(null, null, null, false))
+        }
+    })
 }
 
 

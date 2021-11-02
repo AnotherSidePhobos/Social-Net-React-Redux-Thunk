@@ -74,3 +74,21 @@
         })
       )
   }
+  export const loginAPI = (email, password, rememberMe = false) =>{
+      
+    return axios.post(baseUrl + `/auth/login`,{ email, password, rememberMe}, {
+        withCredentials: true,
+        headers:{
+          "API-KEY": "e22c8b18-65be-4675-9893-02c6ab83692c" 
+        },
+    })
+}
+  export const logoutAPI = () =>{
+      
+    return axios.delete(baseUrl + `/auth/login`, {
+        withCredentials: true,
+        headers:{
+          "API-KEY": "e22c8b18-65be-4675-9893-02c6ab83692c" 
+        },
+    })
+}

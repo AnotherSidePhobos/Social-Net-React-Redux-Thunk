@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import { Navbar } from './Navbar';
 import { authMe } from './../../API/api';
 import {setAuthUserData} from './../../redux/authReducer';
-import {getAuthMe} from './../../redux/authReducer';
+import {getAuthMe, logout} from './../../redux/authReducer';
 import axios from 'axios';
 
 class NavbarContainer extends Component {
-    componentDidMount(){
-        this.props.getAuthMe()
-    }
+
 
     render() {
         return (
@@ -26,4 +24,4 @@ const mapStateToProps = (state) =>{
 }
 
 
-export default connect(mapStateToProps, {getAuthMe})(NavbarContainer);
+export default connect(mapStateToProps, {logout})(NavbarContainer);

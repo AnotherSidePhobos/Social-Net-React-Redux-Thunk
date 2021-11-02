@@ -111,17 +111,17 @@ export const toggleFetching = (isFetch) => {
 // мы не модем делать асинхронные запросы в reducer, потому что 
 // reducer должен отрабатывать быстро, и чтобы сдлеать запрос внутри reducer
 // мы используем thunk
-export const getUsers = (currentPage, pageSize) =>{
+export const requestUsers = (page, pageSize) =>{
     debugger
     return (dispatch) =>{
      dispatch(toggleFetching(true));
 
      debugger
-        getUsersAPI(currentPage, pageSize)
+        getUsersAPI(page, pageSize)
         .then(response => {
             dispatch(toggleFetching(false));
             dispatch(setUsers(response.items))
-            dispatch(setCurrentPage(currentPage))
+            dispatch(setCurrentPage(page))
             dispatch(setTotalUsersCount(response.totalCount))
         });
     }

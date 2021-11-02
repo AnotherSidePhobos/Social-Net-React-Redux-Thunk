@@ -1,3 +1,4 @@
+import React, { Component } from 'react'
 import './App.css';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import DialogsContainer from './components/Messages/DialogsContainer';
@@ -7,30 +8,52 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login/Login';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import { connect } from 'react-redux';
+import {withRouter} from 'react-router';
+import { compose } from 'redux';
+import {initializeApp} from './redux/appReducer';
+import Loading from './components/Loading/Loading';
 
+class App extends Component {
 
-function App(props) {
-  debugger
-  return (
+    componentDidMount(){
+        this.props.initializeApp()
+    }
 
-      <div className="App">
-          <NavbarContainer/>
-          <div className='container'>
-              <Switch>
+    render() {
+        if (!this.props.initialized) {
+            return <Loading/>
+        }
 
-              <Route path="/dialogs" component={DialogsContainer} />
-              <Route path="/users" component={UsersContainer} />
-              <Route path="/music" component={Music} />
-              <Route path="/profile/:userId?" component={ProfileContainer} />
-              <Route path='/' exact component={ProfileContainer}/>
-              <Route path="/login" component={Login} />
-              <Route component={PageNotFound}/>
-
-              </Switch>
-          </div>
-
-      </div>
-  );
+        return (
+            <div className="App">
+                <NavbarContainer/>
+                <div className='container'>
+                    <Switch>
+    
+                    <Route path="/dialogs" component={DialogsContainer} />
+                    <Route path="/users" component={UsersContainer} />
+                    <Route path="/music" component={Music} />
+                    <Route path="/profile/:userId?" component={ProfileContainer} />
+                    <Route path='/' exact component={ProfileContainer}/>
+                    <Route path="/login" component={Login} />
+                    <Route component={PageNotFound}/>
+    
+                    </Switch>
+                </div>
+    
+            </div>
+        )
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return{
+        initialized: state.app.initialized
+    }
+}
+
+
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {initializeApp}))(App);

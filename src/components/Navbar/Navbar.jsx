@@ -22,6 +22,7 @@ export const Navbar = (props) => {
                         props.isAuth ? 
                         <div className="navbar-nav">
                             <NavLink className="nav-link" to="/login">You logged as:  <strong>{props.login}</strong></NavLink>
+                            <button onClick={props.logout}>log out</button>
                         </div>
 
                         :
