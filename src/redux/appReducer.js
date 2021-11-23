@@ -3,7 +3,7 @@ import {authMeAPI, loginAPI, logoutAPI} from '../API/api';
 import {getAuthMe} from './authReducer';
 
 
-const SET_INITIALIZED_SUCCESS = 'SET_INITIALIZED_SUCCESS';
+const SET_INITIALIZED_SUCCESS = 'APP/SET_INITIALIZED_SUCCESS';
 
 const initialState = {
     initialized: false

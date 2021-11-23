@@ -1,7 +1,7 @@
 import React from 'react';
 import Loading from '../../Loading/Loading';
 import s from './ProfileInfo.module.css';
-import Status from './../../Status/Status';
+import StatusWithHooks from './../../Status/StatusWithHooks';
 
 
 export const ProfileInfo = ({profileInfo, status, updateStatus}) => {
@@ -28,7 +28,7 @@ export const ProfileInfo = ({profileInfo, status, updateStatus}) => {
                 <div>
                     contacts: {profileInfo.contacts.vk}
                 </div>
-                <Status status={status} updateStatus={updateStatus}/>
+                <StatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>
         )
     }

@@ -6,25 +6,20 @@ import { required } from '../../utils/Validators/validators'
 import { Input } from '../Common/FormsControls/FormsControls'
 import {login, logout} from './../../redux/authReducer';
 import style from './../Common/FormsControls/FormsControls.module.css';
+import './Login.css';
 
 
-
-
-
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
             <div>
-                <Field placeholder='login' name={"email"} validate={[required]} component={Input}/>
+                <Field className="field" placeholder='login' name={"email"} validate={[required]} component={Input}/>
             </div>
             <div>
-                <Field placeholder='password' name={"password"}  validate={[required]} component={Input}/>
+                <Field className="field" placeholder='password' name={"password"} type={"password"}  validate={[required]} component={Input}/>
             </div>
-            <div>
-                <Field  component={Input} name={"rememberMe"} type={'checkbox'} /> remember me
-            </div>
-            {props.error && <div className={style.formSummaryError}>
-                {props.error}
+            {error && <div className={style.formSummaryError}>
+                {error}
             </div>
             }
             <div>

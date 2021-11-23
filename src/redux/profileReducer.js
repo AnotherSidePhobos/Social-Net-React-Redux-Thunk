@@ -3,9 +3,10 @@ import {getStatusAPI} from './../API/api';
 import {updateStatusAPI} from './../API/api';
 
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
+const ADD_POST = 'PROFILE/ADD-POST';
+const DELETE_POST = 'PROFILE/DELETE_POST';
+const SET_USER_PROFILE = 'PROFILE/SET_USER_PROFILE';
+const SET_STATUS = 'PROFILE/SET_STATUS';
 
 let initialState = {
     postsData: [
@@ -42,6 +43,11 @@ export const profileReducer = (state = initialState, action) =>{
                 ...state,
                 status: action.status
         }
+        case DELETE_POST:
+            return{
+                ...state,
+                postsData: state.postsData.filter((post) => post.id !== action.postId)
+        }
         default:
             return state;
     }
@@ -53,6 +59,13 @@ export const addPostActionCreater = (newPostText) =>{
     return {
         type: ADD_POST,
         newPostText
+    }
+}
+export const deletePost = (postId) =>{
+    
+    return {
+        type: DELETE_POST,
+        postId
     }
 }
 
@@ -71,30 +84,23 @@ export const setStatus = (status) => {
 
 //this is a thunk
 export const setUserProfileThunk = (userId) =>{
-    return (dispatch) => {
-        getOneUserAPI(userId)
-        .then(response => {
-                dispatch(setUserProfile(response.data))
-            });
+    return async (dispatch) => {
+        let response = await getOneUserAPI(userId)
+        dispatch(setUserProfile(response.data))
     }
 }
 export const getStatus = (userId) =>{
-    return (dispatch) => {
-        getStatusAPI(userId)
-        .then(response => {
-            debugger
-                dispatch(setStatus(response.data))
-            });
+    return async (dispatch) => {
+        let response = await getStatusAPI(userId)
+        dispatch(setStatus(response.data))
     }
 }
 export const updateStatus = (status) =>{
-    return (dispatch) => {
-        updateStatusAPI(status)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setStatus(status))
-            }
-        });
+    return async (dispatch) => {
+        let response = await updateStatusAPI(status)
+        if (!response.data.resultCode) {
+            dispatch(setStatus(status))
+        }
     }
 }
 

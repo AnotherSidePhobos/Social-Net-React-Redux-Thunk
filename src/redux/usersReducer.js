@@ -127,6 +127,7 @@ export const requestUsers = (page, pageSize) =>{
     }
 }
 
+
 //thunk creator follow
 export const follow = (userId) =>{
     
